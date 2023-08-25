@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h3 align="center">show products:{{num_product}}</h3>
+  <div class="container">
+    <div class="row justify-container-center m-4">
+      {% if products %}
+        {% for prod in products %}
+          <div class="col-md-4">
+            <div class="card m-2" style="width: 18rem;">
+              <img src="{{prod.image.url}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{prod.name}}</h5>
+                 <h4 class="card-text">{{prod.price}}</h4>
+                 
+                   <a href="{% url 'productDetail' prod.pk %}" class="btn btn-secondary">more details</a>
+                   <a href="{% url 'User' prod.pk %}" >product changes</a>
+              </div>
+           </div>
+         </div>
+         
+       {% endfor %}
+     {% else %}
+     
+      <p>..sorry ,there is no particular products</p>
+     {% endif %}
+     
+  
+     <!-- open category -->
+     <div class="col-md-4" >
+      <h2>category</h2>
+      <a href="{%url 'ShowProducts' %}" class="list-group-item">All products</a>
+          {% for category in categories %}
+             <li class="list-group-item">
+              <a href="{% url 'ShowProducts' %}?category={{ category.name }}">{{ category.name }}</a>
+             </li>
+           {% endfor %}
+
+     </div>
+
+     <!-- closed category -->
+    </div>
+    
+            
+      <h5>pagination</h5>
+        <div class="row m-5">
+          <div class="col-md-12 m-3"> 
+            {% if products.has_other_pages %}
+              <ul class="pagination">
+                {% if products.has_previous %}
+                  <li class="page-item">
+                    <a href="?page={{ products.previous_page_number }}"><span class="page-link">Previous</span></a>
+                      </li>
+                {% else %}
+                    <li class="page-item disabled">
+                      <a href="?page={{ products.paginator.number_pages }}" class="page-link">previous</a>
+                    </li>
+                {% endif %}
+
+                <!--open number pagination-->
+
+                {% for i in products.paginator.page_range %}
+                  {% if products.number == i %}
+                    <li class="page-item active">
+                      <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                    </li>
+                  {% else %}
+                    <li class="'page-item">
+                    <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %} 
+                           
+                   <!--closed Number Pagination -->
+
+                  <!--Here Next button is started -->
+                  {% if products.has_next %}
+                    
+                         
+                    <li class="page-item">
+                      <a href="?page={{products.next_page_number}}"><span class="page-link">Next</span></a>
+                    </li>
+                  {% else %}
+                    <li class="page-item disabled">
+                      <a href="?page={{products.paginator.number_pages}}" class="page-link">Next</a>
+                    </li>
+                  {% endif %}
+                    </ul>
+                  {% endif %}
+
+                  </div>
+              </div>
+        </div>
+        
+        
+      {% endblock %}
+
+

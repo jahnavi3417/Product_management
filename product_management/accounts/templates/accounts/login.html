@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+   <div class="container">
+    <h3 align="center">User Login</h3>
+    <div  class="row justify-content-center">
+        <div class="card-body">
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+
+                <div class="from-group">
+                    <label for="username">User Name</label>
+                    <input type="text" name="username" class="form-control" required>
+                </div>
+
+                <div class="from-group">
+                    <label class="Password">Password</label>
+                    <input type="Password" name="Password" class="form-control" requried>
+                </div>
+
+
+                <input type="submit" value="Login" class="btn btn-secondary btn block">
+            </form>
+        </div>
+    </div>
+   </div>
+
+{% endblock %}

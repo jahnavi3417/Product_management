@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3 align="center">Add products </h3>
+    <div class="container m-5">
+        <form action="" method="post", enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form}}
+
+            <br>
+          
+            <input type="submit" name="submit">
+        </form>
+
+    </div>
+
+{% endblock %}

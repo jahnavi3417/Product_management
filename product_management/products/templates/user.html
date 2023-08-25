@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h3>Add products </h3>
+    
+<div class="container">
+    <div class="row justify-container-center m-4">
+      <div class="col-md-4">
+        <a href="{% url 'ShowProducts' %}" class="btn btn-primary">Back</a>
+          <div class="card m-2" style="width: 18rem;">
+            <img src="{{userupdate.image.url}}" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">{{userupdate.name}}</h5>
+            <h4 class="card-text">{{userupdate.price}}</h4>
+            <p class="card-text">{{userupdate.description}}</p>
+              
+            <a href="{% url 'deleteproduct' userupdate.pk %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'updateProduct' userupdate.pk %}" class="btn btn-warning">Update</a> 
+          </div>
+
+        </div>
+  </div>
+
+</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <h4 align="center"> search result</h4>
+    <div class="container">
+        <div class="row justify-content-center m-4">
+            {% if products %}
+              {% for prod in products %}
+                <div class="col-md-4">
+                  <div class="card m-2" style="width: 18rem;">
+                    <img src="{{prod.image.url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{prod.name}}</h5>
+                       <h4 class="card-text">{{prod.price}}</h4>
+                        <p class="card-text">{{prod.description}}</p>
+                        <p class="card-text">{{prod.created_at}}</p>
+                        <a href="{% url 'productDetail' prod.pk %}" class="btn btn-primary">More Details</a>
+                    </div>
+                 </div>
+               </div>
+             {% endfor %}
+           {% else %}
+            <p>..sorry ,there is no particular products</p>
+           {% endif %}
+        </div>
+
+    </div>
+
+
+{% endblock %}
